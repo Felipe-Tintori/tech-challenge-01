@@ -16,4 +16,5 @@ export const Orange = Template.bind({});
 Orange.args = {
   text: "Botão Laranja",
   type: "ORANGE",
+  outlined: false,
 };

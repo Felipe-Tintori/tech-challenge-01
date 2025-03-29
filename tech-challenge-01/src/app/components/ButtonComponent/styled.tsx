@@ -1,32 +1,46 @@
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
+import { BORDER, COLORS } from "@/app/styles/variables";
 
-// Definir as props corretamente
 interface CustomButtonProps {
-  orange?: string; // Agora as props são opcionais
+  orange?: string;
   green?: string;
   black?: string;
   neutral?: string;
+  outlined?: string;
 }
 
-// Usando styled com as props tipadas
-export const CustomButton = styled(Button)<CustomButtonProps>`
-  background-color: ${({ orange, green, black, neutral }) => {
-    if (orange) return "#FFA500";
-    if (green) return "#008000"; // Cor para o botão verde
-    if (black) return "#000000"; // Cor para o botão preto
-    if (neutral) return "#1976d2"; // Cor para o botão neutro
-    return "#1976d2"; // Valor padrão (pode ser qualquer cor que você preferir)
-  }};
-  color: white;
+const DefaultColors = (
+  orange?: string,
+  green?: string,
+  black?: string,
+  neutral?: string
+): string => {
+  if (orange) return COLORS.ORANGE;
+  if (green) return COLORS.GREEN;
+  if (black) return COLORS.BLACK;
+  if (neutral) return "transparent";
+  return "transparent";
+};
 
-  &:hover {
-    background-color: ${({ orange, green, black, neutral }) => {
-      if (orange) return "#FFA500";
-      if (green) return "#008000"; // Cor para o botão verde
-      if (black) return "#000000"; // Cor para o botão preto
-      if (neutral) return "#1976d2"; // Cor para o botão neutro
-      return "#125ea8"; // Hover padrão
-    }};
-  }
+export const CustomButton = styled(Button)<CustomButtonProps>`
+  background-color: ${({ orange, green, black, neutral, outlined }) => {
+    if (outlined) return "transparent";
+    return DefaultColors(orange, green, black, neutral);
+  }};
+
+  border: ${({ outlined, orange, green, black, neutral }) =>
+    outlined
+      ? `2px solid ${DefaultColors(orange, green, black, neutral)}`
+      : "none"};
+  border-radius: ${BORDER.RADIUS};
+  color: ${({ neutral, outlined, orange, green, black }) => {
+    if (neutral) return COLORS.TEXT;
+    if (outlined) return DefaultColors(orange, green, black, neutral);
+    return "#fff";
+  }};
+  box-shadow: none;
+  padding: 10px 40px;
+  font-size: 16px;
+  text-transform: none;
 `;
