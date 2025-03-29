@@ -5,12 +5,14 @@ export interface ButtonComponentProps {
   text: string;
   type: "ORANGE" | "GREEN" | "BLACK" | "NEUTRAL";
   outlined?: boolean;
+  sendSubmit: () => void;
 }
 
 export default function ButtonComponent({
   text,
   type,
   outlined,
+  sendSubmit,
 }: ButtonComponentProps) {
   return (
     <CustomButton
@@ -19,6 +21,7 @@ export default function ButtonComponent({
       black={type === "BLACK" ? "true" : undefined}
       neutral={type === "NEUTRAL" ? "true" : undefined}
       outlined={outlined ? "true" : undefined}
+      onClick={sendSubmit} // Passando a função para o botão
     >
       {text}
     </CustomButton>

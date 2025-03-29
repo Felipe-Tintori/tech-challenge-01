@@ -1,13 +1,13 @@
 import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import Button, { ButtonProps } from "@mui/material/Button";
 import { BORDER, COLORS } from "@/app/styles/variables";
 
-interface CustomButtonProps {
-  orange?: string;
-  green?: string;
-  black?: string;
-  neutral?: string;
-  outlined?: string;
+interface CustomButtonProps extends ButtonProps {
+  orange?: "true";
+  green?: "true";
+  black?: "true";
+  neutral?: "true";
+  outlined?: "true";
 }
 
 const DefaultColors = (
